@@ -31,7 +31,7 @@ def allowed_file(filename):
 def get_uploaded_images():
     # Specify the folder where the images are stored
     upload_folder = os.path.join(os.getcwd(), 'uploads')
-    
+    print(f"Looking for images in: {upload_folder}")  # Debug line
     # List to store the image filenames
     image_files = []
 
@@ -126,6 +126,7 @@ def login():
     return render_template("login.html", form=form)
 
 @app.route('/files')
+@login_required
 def files():
     # Get the list of uploaded image files using the helper function
     images = get_uploaded_images()

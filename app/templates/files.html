@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uploaded Files</title>
-</head>
-<body>
-    <h1>Uploaded Images</h1>
+{% extends 'base.html' %}
 
-    <ul>
-        {% for image in images %}
-            <li>
-                <!-- Using url_for to generate the URL for each image -->
-                <img src="{{ url_for('get_image', filename=image) }}" alt="{{ image }}" width="200">
-            </li>
-        {% else %}
-            <p>No images uploaded yet.</p>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% block main %}
+<h1 class="page-header">Uploaded Images</h1>
+
+{% include 'flash_messages.html' %}
+
+<div class="image-gallery">
+    {% for filename in image_list %}
+        <div class="image-item">
+            <img src="{{ url_for('get_image', filename=filename) }}" alt="{{ filename }}">
+        </div>
+    {% else %}
+        <p>No images uploaded yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
